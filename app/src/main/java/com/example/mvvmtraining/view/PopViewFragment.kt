@@ -2,6 +2,7 @@ package com.example.mvvmtraining.view
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.mvvmtraining.R
 import com.example.mvvmtraining.adapters.PopAdapter
 import com.example.mvvmtraining.model.remote.SongResponse
 import com.example.mvvmtraining.model.remote.SongService
+import com.example.mvvmtraining.utils.CATEGORY_POP
 import retrofit2.Call
 import retrofit2.Response
 
@@ -30,9 +32,9 @@ class PopViewFragment : Fragment() {
         initView(view)
         popRefresh = view.findViewById(R.id.pop_swipe_refresh)
         popRefresh.setOnRefreshListener {
-            connectToRetrofit("pop")
+            connectToRetrofit()
             Log.d("refresh", "refresh success")
-            Handler().postDelayed( {
+            Handler(Looper.getMainLooper()).postDelayed({
                 popRefresh.isRefreshing = false
             }, 1000)
         }
@@ -44,12 +46,12 @@ class PopViewFragment : Fragment() {
 
     private fun initView(view: View) {
         popView = view.findViewById(R.id.pop_song_list)
-        connectToRetrofit("pop")
+        connectToRetrofit()
     }
 
-    private fun connectToRetrofit(type: String) {
+    private fun connectToRetrofit() {
         SongService.initRetrofit().
-        getSongs(type,"music","song","50").
+        getSongs(CATEGORY_POP,"music","song","50").
         enqueue(object : retrofit2.Callback<SongResponse>{
             override fun onFailure(call: Call<SongResponse>, t: Throwable) {
             }
