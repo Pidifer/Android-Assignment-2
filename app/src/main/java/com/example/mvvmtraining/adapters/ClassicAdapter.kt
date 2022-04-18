@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.media.MediaPlayer
 import android.view.View
-
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvmtraining.model.remote.Song
 import android.view.LayoutInflater
@@ -18,7 +17,7 @@ import java.io.IOException
 class ClassicAdapter(private val dataSet: List<Song>) :
     RecyclerView.Adapter<ClassicAdapter.ClassicViewHolder>() {
 
-    class ClassicViewHolder(private val view: View):RecyclerView.ViewHolder(view){
+    class ClassicViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private var player: MediaPlayer? = null
         private val cdPic: ImageView =
             view.findViewById(R.id.cd_picture)
@@ -29,7 +28,7 @@ class ClassicAdapter(private val dataSet: List<Song>) :
         private val price: TextView =
             view.findViewById(R.id.price)
 
-        fun onBind(dataItem: Song){
+        fun onBind(dataItem: Song) {
             val builder = AlertDialog.Builder(view.context)
             player = MediaPlayer()
             albumTitle.text = dataItem.collectionName
@@ -47,7 +46,7 @@ class ClassicAdapter(private val dataSet: List<Song>) :
                 }
                 builder.setTitle("Playing Music")
                 builder.setMessage("Do you want to stop the music?")
-                builder.setPositiveButton("Yes"){ _: DialogInterface, _ -> player?.stop() }
+                builder.setPositiveButton("Yes") { _: DialogInterface, _ -> player?.stop() }
                 builder.setCancelable(false)
                 builder.show()
             }
@@ -59,7 +58,8 @@ class ClassicAdapter(private val dataSet: List<Song>) :
             LayoutInflater.from(parent.context).inflate(
                 R.layout.song_item_layout,
                 parent,
-                false)
+                false
+            )
         )
     }
 

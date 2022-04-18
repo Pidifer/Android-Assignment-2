@@ -30,7 +30,6 @@ class PopViewFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.pop_fragment_list_layout, container, false)
         initView(view)
-        popRefresh = view.findViewById(R.id.pop_swipe_refresh)
         popRefresh.setOnRefreshListener {
             connectToRetrofit()
             Log.d("refresh", "refresh success")
@@ -46,32 +45,35 @@ class PopViewFragment : Fragment() {
 
     private fun initView(view: View) {
         popView = view.findViewById(R.id.pop_song_list)
+        popRefresh = view.findViewById(R.id.pop_swipe_refresh)
         connectToRetrofit()
     }
 
     private fun connectToRetrofit() {
-        SongService.initRetrofit().
-        getSongs(CATEGORY_POP,"music","song","50").
-        enqueue(object : retrofit2.Callback<SongResponse>{
-            override fun onFailure(call: Call<SongResponse>, t: Throwable) {
-            }
-
-            override fun onResponse(call: Call<SongResponse>,
-                                    response:
-                                    Response<SongResponse>) {
-                if (response.isSuccessful) {
-                    val songResponse = response.body()
-                    Log.d("songResponse", songResponse.toString())
-                    updateAdapter(songResponse)
+        SongService.initRetrofit().getSongs(CATEGORY_POP, "music", "song", "50")
+            .enqueue(object : retrofit2.Callback<SongResponse> {
+                override fun onFailure(call: Call<SongResponse>, t: Throwable) {
                 }
-            }
 
-        })
+                override fun onResponse(
+                    call: Call<SongResponse>,
+                    response:
+                    Response<SongResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val songResponse = response.body()
+                        Log.d("songResponse", songResponse.toString())
+                        updateAdapter(songResponse)
+                    }
+                }
+
+            })
     }
 
     private fun updateAdapter(body: SongResponse?) {
-        body?.let{
-            popView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+        body?.let {
+            popView.layoutManager =
+                androidx.recyclerview.widget.LinearLayoutManager(requireContext())
             popView.adapter = PopAdapter(it.results)
         }//?: showError("No response from server")
     }

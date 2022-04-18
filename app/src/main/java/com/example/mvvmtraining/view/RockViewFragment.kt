@@ -30,7 +30,6 @@ class RockViewFragment : Fragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.rock_fragment_list_layout, container, false)
         initView(view)
-        rockRefresh = view.findViewById(R.id.rock_swipe_refresh)
         rockRefresh.setOnRefreshListener {
             connectToRetrofit()
             Log.d("refresh", "refresh success")
@@ -43,32 +42,35 @@ class RockViewFragment : Fragment() {
 
     private fun initView(view: View) {
         rockView = view.findViewById(R.id.rock_song_list)
+        rockRefresh = view.findViewById(R.id.rock_swipe_refresh)
         connectToRetrofit()
     }
 
     private fun connectToRetrofit() {
-        SongService.initRetrofit().
-        getSongs(CATEGORY_ROCK,"music","song","50").
-        enqueue(object : retrofit2.Callback<SongResponse>{
-            override fun onFailure(call: Call<SongResponse>, t: Throwable) {
-            }
-
-            override fun onResponse(call: Call<SongResponse>,
-                                    response:
-                                    Response<SongResponse>) {
-                if (response.isSuccessful) {
-                    val songResponse = response.body()
-                    Log.d("songResponse", songResponse.toString())
-                    updateAdapter(songResponse)
+        SongService.initRetrofit().getSongs(CATEGORY_ROCK, "music", "song", "50")
+            .enqueue(object : retrofit2.Callback<SongResponse> {
+                override fun onFailure(call: Call<SongResponse>, t: Throwable) {
                 }
-            }
 
-        })
+                override fun onResponse(
+                    call: Call<SongResponse>,
+                    response:
+                    Response<SongResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val songResponse = response.body()
+                        Log.d("songResponse", songResponse.toString())
+                        updateAdapter(songResponse)
+                    }
+                }
+
+            })
     }
 
     private fun updateAdapter(body: SongResponse?) {
-        body?.let{
-            rockView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
+        body?.let {
+            rockView.layoutManager =
+                androidx.recyclerview.widget.LinearLayoutManager(requireContext())
             rockView.adapter = RockAdapter(it.results)
         }//?: showError("No response from server")
     }

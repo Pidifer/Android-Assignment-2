@@ -50,7 +50,7 @@ class PopAdapter(private val dataSet: List<Song>) :
                 }
                 builder.setTitle("Playing Music")
                 builder.setMessage("Do you want to stop the music?")
-                builder.setPositiveButton("Yes"){ _: DialogInterface, _ -> player?.stop() }
+                builder.setPositiveButton("Yes") { _: DialogInterface, _ -> player?.stop() }
                 builder.setCancelable(false)
                 builder.show()
             }

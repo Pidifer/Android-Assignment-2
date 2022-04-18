@@ -9,12 +9,14 @@ import retrofit2.http.Query
 
 interface SongService {
     @GET(END_POINT)
-    fun getSongs(@Query(PARAM_TERM)term:String,
-                  @Query(PARAM_MEDIA_TYPE)mediaType:String,
-                  @Query(PARAM_ENTITY)entity:String,
-                  @Query(PARAM_LIMIT)limit:String): Call<SongResponse>
+    fun getSongs(
+        @Query(PARAM_TERM) term: String,
+        @Query(PARAM_MEDIA_TYPE) mediaType: String,
+        @Query(PARAM_ENTITY) entity: String,
+        @Query(PARAM_LIMIT) limit: String
+    ): Call<SongResponse>
 
-    companion object{
+    companion object {
         fun initRetrofit(): SongService {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
