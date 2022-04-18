@@ -16,10 +16,10 @@ import java.io.IOException
 
 
 class PopAdapter(private val dataSet: List<Song>) :
-    RecyclerView.Adapter<PopAdapter.MoviesViewHolder>() {
+    RecyclerView.Adapter<PopAdapter.PopViewHolder>() {
 
 
-    class MoviesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class PopViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private var player: MediaPlayer? = null
         private val cdPic: ImageView =
             view.findViewById(R.id.cd_picture)
@@ -57,8 +57,8 @@ class PopAdapter(private val dataSet: List<Song>) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {
-        return MoviesViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopViewHolder {
+        return PopViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.song_item_layout,
                 parent,
@@ -67,7 +67,7 @@ class PopAdapter(private val dataSet: List<Song>) :
         )
     }
 
-    override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PopViewHolder, position: Int) {
         holder.onBind(dataSet[position])
     }
 
