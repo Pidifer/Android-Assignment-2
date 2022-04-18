@@ -32,7 +32,7 @@ class PopViewFragment : Fragment() {
         popRefresh.setOnRefreshListener {
             connectToRetrofit("pop")
             Log.d("refresh", "refresh success")
-            Handler().postDelayed(Runnable {
+            Handler().postDelayed( {
                 popRefresh.isRefreshing = false
             }, 1000)
         }
@@ -47,7 +47,7 @@ class PopViewFragment : Fragment() {
         connectToRetrofit("pop")
     }
 
-    fun connectToRetrofit(type: String) {
+    private fun connectToRetrofit(type: String) {
         SongService.initRetrofit().
         getSongs(type,"music","song","50").
         enqueue(object : retrofit2.Callback<SongResponse>{

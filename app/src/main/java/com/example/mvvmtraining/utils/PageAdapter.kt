@@ -9,7 +9,7 @@ import com.example.mvvmtraining.view.RockViewFragment
 
 class PageAdapter(fm:FragmentManager) : FragmentPagerAdapter(fm) {
     override fun getCount(): Int {
-        return 3;
+        return 3
     }
 
     override fun getItem(position: Int): Fragment {

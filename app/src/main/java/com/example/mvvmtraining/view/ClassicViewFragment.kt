@@ -33,7 +33,7 @@ class ClassicViewFragment : Fragment() {
         classicRefresh.setOnRefreshListener {
             connectToRetrofit("classick")
             Log.d("refresh", "refresh success")
-            Handler().postDelayed(Runnable {
+            Handler().postDelayed( {
                 classicRefresh.isRefreshing = false
             }, 1000)
         }
@@ -45,7 +45,7 @@ class ClassicViewFragment : Fragment() {
         connectToRetrofit("classick")
     }
 
-    fun connectToRetrofit(type: String) {
+    private fun connectToRetrofit(type: String) {
         SongService.initRetrofit().
         getSongs(type,"music","song","50").
         enqueue(object : retrofit2.Callback<SongResponse>{

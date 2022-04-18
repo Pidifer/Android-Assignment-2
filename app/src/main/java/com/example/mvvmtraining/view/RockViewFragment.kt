@@ -32,7 +32,7 @@ class RockViewFragment : Fragment() {
         rockRefresh.setOnRefreshListener {
             connectToRetrofit("rock")
             Log.d("refresh", "refresh success")
-            Handler().postDelayed(Runnable {
+            Handler().postDelayed( {
                 rockRefresh.isRefreshing = false
             }, 1000)
         }
@@ -44,7 +44,7 @@ class RockViewFragment : Fragment() {
         connectToRetrofit("rock")
     }
 
-    fun connectToRetrofit(type: String) {
+    private fun connectToRetrofit(type: String) {
         SongService.initRetrofit().
         getSongs(type,"music","song","50").
         enqueue(object : retrofit2.Callback<SongResponse>{

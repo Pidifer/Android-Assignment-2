@@ -20,7 +20,7 @@ class PopAdapter(private val dataSet: List<Song>) :
 
 
     class MoviesViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        var player: MediaPlayer? = null
+        private var player: MediaPlayer? = null
         private val cdPic: ImageView =
             view.findViewById(R.id.cd_picture)
         private val albumTitle: TextView =
@@ -50,7 +50,7 @@ class PopAdapter(private val dataSet: List<Song>) :
                 }
                 builder.setTitle("Playing Music")
                 builder.setMessage("Do you want to stop the music?")
-                builder.setPositiveButton("Yes",{ dialogInterface: DialogInterface, i -> player?.stop() })
+                builder.setPositiveButton("Yes"){ _: DialogInterface, _ -> player?.stop() }
                 builder.setCancelable(false)
                 builder.show()
             }
