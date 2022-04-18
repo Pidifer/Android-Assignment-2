@@ -42,8 +42,9 @@ class RockViewFragment : Fragment() {
 
     private fun initView(view: View) {
         rockView = view.findViewById(R.id.rock_song_list)
-        rockRefresh = view.findViewById(R.id.rock_swipe_refresh)
         connectToRetrofit()
+        rockRefresh = view.findViewById(R.id.rock_swipe_refresh)
+
     }
 
     private fun connectToRetrofit() {

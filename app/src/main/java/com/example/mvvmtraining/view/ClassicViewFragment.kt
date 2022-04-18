@@ -43,8 +43,8 @@ class ClassicViewFragment : Fragment() {
 
     private fun initView(view: View) {
         classicView = view.findViewById(R.id.classic_song_list)
-        classicRefresh = view.findViewById(R.id.classic_swipe_refresh)
         connectToRetrofit()
+        classicRefresh = view.findViewById(R.id.classic_swipe_refresh)
     }
 
     private fun connectToRetrofit() {

@@ -45,8 +45,8 @@ class PopViewFragment : Fragment() {
 
     private fun initView(view: View) {
         popView = view.findViewById(R.id.pop_song_list)
-        popRefresh = view.findViewById(R.id.pop_swipe_refresh)
         connectToRetrofit()
+        popRefresh = view.findViewById(R.id.pop_swipe_refresh)
     }
 
     private fun connectToRetrofit() {
